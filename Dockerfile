@@ -1,6 +1,6 @@
 FROM python:3.9-slim-bullseye
 
-ENV GAM_VERSION=6.07
+ENV GAM_VERSION=6.21
 ENV DEBIAN_FRONTEND=noninteractive
 
 COPY gam-wrapper.sh /usr/bin/gam-wrapper.sh
