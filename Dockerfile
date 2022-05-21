@@ -3,7 +3,7 @@ FROM python:3.9-slim-bullseye
 ENV GAM_VERSION=6.21
 ENV DEBIAN_FRONTEND=noninteractive
 
-COPY gam-wrapper.sh /usr/bin/gam-wrapper.sh
+COPY gam-env-wrapper.sh /usr/bin/gam-env-wrapper.sh
 
 RUN BUILD_TOOLS="curl swig gcc libpcsclite-dev" \
     && apt-get update \
@@ -16,7 +16,7 @@ RUN BUILD_TOOLS="curl swig gcc libpcsclite-dev" \
     && pip install --no-cache-dir -r /gam/src/requirements.txt \
     && touch /gam/src/nobrowser.txt /gam/src/noupdatecheck.txt \
     && rm -rf /gam/GAM-${GAM_VERSION} \
-    && chmod 0755 /usr/bin/gam-wrapper.sh \
+    && chmod 0755 /usr/bin/gam-env-wrapper.sh \
     && apt remove -yqq $BUILD_TOOLS \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
@@ -24,4 +24,4 @@ RUN BUILD_TOOLS="curl swig gcc libpcsclite-dev" \
 
 WORKDIR /gam
 
-ENTRYPOINT [ "/usr/bin/gam-wrapper.sh" ]
+ENTRYPOINT [ "/usr/bin/gam-env-wrapper.sh" ]

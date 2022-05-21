@@ -1,15 +1,21 @@
 # docker-gam
 
-## Quickstart
+Allows running `gam` using environment variables instead of local files.
 
-1. Ensure `docker` is installed.
-1. Clone this repo
-1. If you have existing `oauth2service.json`, `oauth2.txt`, and `client_secrets.json`,
-   place them inside the `secrets/` directory.
-1. From the repo root, run the `./gam` executable just like normal GAM, e.g.
+## Usage
+
+1. Build Docker image with `make`
+1. Generate necessary credentials as described [here](https://github.com/call/docker-gam).
+1. Export necessary variables `GAM_OAUTHFILE` and `GAM_CLIENTSECRETS`
 
    ```bash
-   ./gam info domain
-   ./gam project create
-   ./gam oauth info
+   export GAM_OAUTHFILE=`base64 secrets/oauth2.txt`
+   export GAM_CLIENTSECRETS=`base64 secrets/client_secrets.json`
+   ```
+
+1. Run it like
+
+   ```bash
+   docker run -it --rm -e GAM_OAUTHFILE -e GAM_CLIENTSECRETS docker-gam info domain
+   docker run -it --rm -e GAM_OAUTHFILE -e GAM_CLIENTSECRETS docker-gam info user me@domain.com
    ```

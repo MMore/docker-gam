@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-docker run -it --rm \
-    -v "$(pwd)/secrets":/secrets \
-    ghcr.io/call/docker-gam:main "$@"
