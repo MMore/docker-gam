@@ -17,7 +17,7 @@ if [ -z "$GAM_CLIENTSECRETS" ]; then
   exit 1
 fi
 
-echo $GAM_OAUTHFILE|base64 -d > oauth2.txt
-echo $GAM_CLIENTSECRETS|base64 -d > client_secrets.json
+echo $GAM_OAUTHFILE > oauth2.txt
+echo $GAM_CLIENTSECRETS > client_secrets.json
 
 python "${GAMDIR}/src/gam.py" "$@"
